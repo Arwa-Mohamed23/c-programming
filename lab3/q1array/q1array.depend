@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1731933836 source:/home/arwa/Documents/lab3/q1array/main.c
+	<stdio.h>
+	<stdlib.h>
+
+1731956085 source:/home/arwa/Documents/c-programming/lab3/q1array/main.c
+	<stdio.h>
+	<stdlib.h>
+

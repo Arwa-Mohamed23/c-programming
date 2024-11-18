@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1731956936 source:/home/arwa/Documents/lab3/q3PowerFunction/main.c
+	<stdio.h>
+	<stdlib.h>
+
+1731959974 source:/home/arwa/Documents/c-programming/lab3/q3PowerFunction/main.c
+	<stdio.h>
+	<stdlib.h>
+

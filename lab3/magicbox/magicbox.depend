@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1731934865 source:/home/arwa/Documents/lab3/magicbox/main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<windows.h>
+	<io.h>
+	<unistd.h>
+	<termios.h>
+
+1731962405 source:/home/arwa/Documents/c-programming/lab3/magicbox/main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<windows.h>
+	<io.h>
+	<unistd.h>
+	<termios.h>
+
