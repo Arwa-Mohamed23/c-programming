@@ -221,16 +221,19 @@ void delay(int number_of_seconds)
     nanosleep(&req, NULL);  // Delay for 1.5 seconds*/
 }
 #endif
+
 int main()
 {
-    printf("new\n");
-    printf("display\n");
-    printf("exit\n");
+    printf("new\ndisplay\nexit\n");
     int x=0,y=0,flag=1;
     char ch;
-    gotoxy(x,y);
     while(flag)
     {
+        gotoxy(x,y);
+        setTextColor(stdout, TC_BLUE);
+        printf("new");
+       //setTextColor(stdout, TC_WHITE);
+       //printf("display\nexit\n");
         ch=getch();
         if(ch==27)
         {
@@ -240,13 +243,14 @@ int main()
                 ch=getch();
                 if(ch==66)
                 {
-                    y=(y+1)%3;
+                    y=(y+1)%4;
                     gotoxy(x,y);
                     setTextColor(stdout, TC_BLUE);
                     printf("display\n");
                     setTextColor(stdout, TC_WHITE);
                 }
-                else if(ch==65){
+                else if(ch==65)
+                {
                     y--;
                     gotoxy(x,y);
                     setTextColor(stdout, TC_BLUE);
@@ -256,8 +260,9 @@ int main()
             }
 
         }
-        else{
-        flag= 0;
+        else
+        {
+            flag= 0;
         }
     }
     return 0;
