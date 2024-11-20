@@ -1,18 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define ROW 1
-#define COL 2
+#define ROW 3
+#define COL 4
 int main()
 {
     float arr[ROW][COL];
     printf("Enter 2D array of size %dx%d:\n",ROW,COL);
+    char checkvalid;
     for(int i=0; i<ROW; i++)
     {
         for(int j=0; j<COL; j++)
         {
-            scanf("%f",&arr[i][j]);
-            //printf("\nascii=%d\n",(char)arr[i][j]);
+            if(scanf("%f%c", &arr[i][j], &checkvalid) != 2 || checkvalid != '\n')
+            {
+                printf("not valide input\n");
+                return 0;
+            }
         }
     }
     float sumOfRow,avrgOfCol;
