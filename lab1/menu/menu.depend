@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1732179800 source:/home/arwa/Documents/c-programming/lab1/menu/main.c
+	<stdio.h>
+	<stdlib.h>
+	"empfunction.h"
+
+1732179646 source:/home/arwa/Documents/c-programming/lab1/menu/empfunction .c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"empfunction.h"
+	<windows.h>
+	<io.h>
+	<unistd.h>
+	<termios.h>
+
+1732179646 /home/arwa/Documents/c-programming/lab1/menu/empfunction.h
+

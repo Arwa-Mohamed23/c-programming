@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1732217631 source:/home/arwa/Documents/c-programming/lab4/stringFunction/implementfunction.c
+
+1732217757 source:/home/arwa/Documents/c-programming/lab4/stringFunction/main.c
+	<stdio.h>
+	<stdlib.h>
+	"implementfunction.h"
+
+1732216832 /home/arwa/Documents/c-programming/lab4/stringFunction/implementfunction.h
+

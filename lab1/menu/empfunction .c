@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
+#include "empfunction.h"
 /*
     Reference:-
 
@@ -68,27 +68,6 @@ char getche(void)
 {
     return getch_(1);
 }
-// use an enum for platform-independent interface:
-typedef enum TextColor
-{
-    TC_BLACK = 0,
-    TC_BLUE = 1,
-    TC_GREEN = 2,
-    TC_CYAN = 3,
-    TC_RED = 4,
-    TC_MAGENTA = 5,
-    TC_BROWN = 6,
-    TC_LIGHTGRAY = 7,
-    TC_DARKGRAY = 8,
-    TC_LIGHTBLUE = 9,
-    TC_LIGHTGREEN = 10,
-    TC_LIGHTCYAN = 11,
-    TC_LIGHTRED = 12,
-    TC_LIGHTMAGENTA = 13,
-    TC_YELLOW = 14,
-    TC_WHITE = 15
-} TextColor;
-
 
 // set output color on the given stream:
 void setTextColor(FILE *stream, TextColor color);
@@ -186,84 +165,98 @@ void setTextColor(FILE *stream, TextColor color)
     }
 }
 
-
-#endif
-#ifdef _WIN32
-void delay(int number_of_seconds)
-{
-    // Converting time into milli_seconds
-    int milli_seconds = 1000 * number_of_seconds;
-
-    // Storing start time
-    clock_t start_time = clock();
-
-    // looping till required time is not achieved
-    while (clock() < start_time + milli_seconds);
-}
-#else
-void delay(int number_of_seconds)
-{
-    fflush(stdout);
-    // Converting time into clock ticks (assuming CLOCKS_PER_SEC is the number of clock ticks per second)
-    int clock_ticks = number_of_seconds * CLOCKS_PER_SEC;
-
-    // Storing start time
-    clock_t start_time = clock();
-
-    // Loop until the required time has passed
-    while (clock() - start_time < clock_ticks)
-    {
-        // Busy-waiting, consuming CPU cycles (not efficient)
-    }
-    /*struct timespec req;
-    req.tv_sec = 1;      // Delay for 1 second
-    req.tv_nsec = number_of_seconds*1;  // 500 milliseconds (0.5 seconds)
-    nanosleep(&req, NULL);  // Delay for 1.5 seconds*/
-}
 #endif
 
-int main()
-{
-    printf("new\ndisplay\nexit\n");
-    int x=0,y=0,flag=1;
-    char ch;
-    while(flag)
-    {
-        gotoxy(x,y);
-        setTextColor(stdout, TC_BLUE);
-        printf("new");
-       //setTextColor(stdout, TC_WHITE);
-       //printf("display\nexit\n");
-        ch=getch();
-        if(ch==27)
-        {
-            ch=getch();
-            if(ch==91)
-            {
-                ch=getch();
-                if(ch==66)
-                {
-                    y=(y+1)%4;
-                    gotoxy(x,y);
-                    setTextColor(stdout, TC_BLUE);
-                    printf("display\n");
-                    setTextColor(stdout, TC_WHITE);
-                }
-                else if(ch==65)
-                {
-                    y--;
-                    gotoxy(x,y);
-                    setTextColor(stdout, TC_BLUE);
-                    printf("display\n");
-                    setTextColor(stdout, TC_WHITE);
-                }
-            }
 
-        }
-        else
-        {
-            flag= 0;
-        }
+
+void enterNewEmployee (employee e[],int index)
+{
+    printf("Enter employee code: ");
+    scanf("%d",&e[index].code);
+    printf("Enter employee name: ");
+    scanf("%s",&e[index].name);
+    printf("Enter employee salary: ");
+    scanf("%d",&e[index].salary);
+}
+
+void displayEmployee (employee e[],int size)
+{
+    for(int i=0; i<size; i++)
+    {
+        printf("Employee code: %d\n",e[i].code);
+        printf("Employee name: %s\n",e[i].name);
+        printf("Employee salary: %d\n",e[i].salary);
+        printf("***************************************\n");
     }
-    return 0;
+}
+
+void displayIdEmployee(employee e[],int size)
+{
+    for(int i=0; i<size; i++)
+    {
+        printf("Code Employee %d : %d\n",i+1,e[i].code);
+    }
+}
+
+void deletEmployee(employee e[],int size,int id)
+{
+    char foundindex=0;
+    for(int i=0; i<size; i++)
+    {
+        if(foundindex)
+        {
+           /* e[i-1].code=e[i].code;
+            e[i-1].name=e[i].name;
+            e[i-1].salary=e[i].salary;*/
+            e[i-1]=e[i];
+        }
+        if(e[i].code==id)foundindex=1;
+    }
+}
+
+void switchoption(int numofoption)
+{
+    system("clear");
+    switch(numofoption)
+    {
+    case 0:
+        setTextColor(stdout,TC_BLUE);
+        printf("Add New Employee");
+        setTextColor(stdout,TC_WHITE);
+        printf("\nDisplay Employee\nDelete Employee\nModifie Employee\nExit\n");
+        break;
+    case 1:
+        printf("Add New Employee\n");
+        setTextColor(stdout,TC_BLUE);
+        printf("Display Employee");
+        setTextColor(stdout,TC_WHITE);
+        printf("\nDelete Employee\nModifie Employee\nExit\n");
+        break;
+    case 2:
+        printf("Add New Employee\nDisplay Employee\n");
+        setTextColor(stdout,TC_BLUE);
+        printf("Delete Employee");
+        setTextColor(stdout,TC_WHITE);
+        printf("\nModifie Employee\nExit\n");
+        break;
+    case 3:
+        printf("Add New Employee\nDisplay Employee\nDelete Employee\n");
+        setTextColor(stdout,TC_BLUE);
+        printf("Modifie Employee");
+        setTextColor(stdout,TC_WHITE);
+        printf("\nExit\n");
+        break;
+    case 4:
+        printf("Add New Employee\nDisplay Employee\nDelete Employee\nModifie Employee\n");
+        setTextColor(stdout,TC_BLUE);
+        printf("Exit\n");
+        setTextColor(stdout,TC_WHITE);
+        break;
+         case 5:
+        printf("Add New Employee\nDisplay Employee\nDelete Employee\nModifie Employee\n");
+        setTextColor(stdout,TC_BLUE);
+        printf("Exit\n");
+        setTextColor(stdout,TC_WHITE);
+        break;
+    }
 }
