@@ -6,12 +6,12 @@ int main()
 {
     employee emp[SIZE]= {0};
     int size=0,option=0;
-    char run=1,ch;
+    char ch;
     switchoption(option);
     while(1)
     {
         ch=getch();
-        if(ch==27)
+        if(ch==EXTENDCHAR)
         {
             ch=getch();
             if(ch==ARROW)
@@ -20,47 +20,106 @@ int main()
                 if(ch==DOWN)
                 {
                     option=(option+1)%NUMOFLIST;
-                    switchoption(option);
                 }
                 else if(ch==UP)
                 {
                     option=(((option-1)%NUMOFLIST)+NUMOFLIST)%NUMOFLIST;
-                    switchoption(option);
                 }
+                else if(ch==HOME)
+                {
+                    option=0;
+                }
+                else if(ch==END)
+                {
+                    option=4;
+                }
+                switchoption(option);
             }
+        }
+        else if(ch==BACK)
+        {
+            system("clear");
+            switchoption(option);
         }
         else if(ch==ENTER)
         {
+
             if(option==NEW)
             {
                 do
                 {
-                    system("clear");
-                    enterNewEmployee(emp,size);
-                    size++;
-                    ch=getch();
-                    printf("Do you want enter another employee (yes or no)?");
-                    ch=getche();
-                    if(ch==NO)
+                    if(size==SIZE)
                     {
                         system("clear");
-                        switchoption(option);
+                        printf("The storage space is full,You can not add employee\n");
+                        break;
+                    }
+                    else
+                    {
+                        system("clear");
+                        enterNewEmployee(emp,size);
+                        size++;
+                        printf("Do you want enter another employee Yes(y) or No(n)?\n");
+                        char isenter=1;
+                        while(isenter)
+                        {
+                            ch=getch();
+                            if(ch==NO)
+                            {
+                                system("clear");
+                                switchoption(option);
+                                isenter=0;
+                            }
+                            else if(ch==YES)
+                                isenter=0;
+                        }
                     }
                 }
                 while(ch==YES);
             }
-
             else if(option==DISPLAY)
             {
                 system("clear");
                 if(size==0)
-                {
                     printf("No employee added\n");
-                }
                 else
                     displayEmployee(emp,size);
             }
             else if(option==DELETE)
+            {
+                do
+                {
+                    if(size==0)
+                    {
+                        system("clear");
+                        printf("No employee added\n");
+                        break;
+                    }
+                    else
+                    {
+                        system("clear");
+                        displayIdEmployee(emp,size);
+                        deletEmployee(emp,size);
+                        size--;
+                        printf("Do you want delet another employee Yes(y) or No(n)?\n");
+                        char isenter=1;
+                        while(isenter)
+                        {
+                            ch=getch();
+                            if(ch==NO)
+                            {
+                                system("clear");
+                                switchoption(option);
+                                isenter=0;
+                            }
+                            else if(ch==YES)
+                                isenter=0;
+                        }
+                    }
+                }
+                while(ch==YES);
+            }
+            else if(option==MODIFIE)
             {
                 system("clear");
                 if(size==0)
@@ -70,32 +129,9 @@ int main()
                 else
                 {
                     displayIdEmployee(emp,size);
-                    printf("Enter the employee id you want to delete : ");
-                    char id;
-                    scanf("%c",&id);
-                    if(id==BACK)
-                    {
-                        system("clear");
-                        switchoption(option);
-                    }
-                    deletEmployee(emp,size,id);
-                    size--;
+                    printf("Enter the employee id you want to Modifie : ");
                 }
             }
-            else if(option==MODIFIE)
-             {
-                 system("clear");
-                 if(size==0)
-                 {
-                     printf("No employee added\n");
-                 }
-                 else
-                 {
-                     displayIdEmployee(emp,size);
-                     printf("Enter the employee id you want to Modifie : ");
-
-                 }
-             }
             else
             {
                 system("clear");
@@ -103,21 +139,18 @@ int main()
                 return 0;
             }
         }
-
-        else if(ch==BACK)
-        {
-            system("clear");
-            switchoption(option);
-        }
     }
-   /* char ch;
-    ch=getch();
-    printf("%d\n",ch);
-    ch=getch();
-    printf("%d\n",ch);
-    ch=getch();
-    printf("%d\n",ch);
-    ch=getch();
-    printf("%d\n",ch);*/
-    return 0;
+
+
+
+    /* char ch;
+     ch=getch();
+     printf("%d\n",ch);
+     ch=getch();
+     printf("%d\n",ch);
+     ch=getch();
+     printf("%d\n",ch);
+     ch=getch();
+     printf("%d\n",ch);*/
+
 }

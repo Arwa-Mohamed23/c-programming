@@ -31,6 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="implementfunction.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="implementfunction.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

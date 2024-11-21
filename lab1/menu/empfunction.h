@@ -1,10 +1,13 @@
 #define NUMOFLIST 5
-#define SIZE 5
+#define SIZE 2
+#define EXTENDCHAR 27
 #define UP 65
 #define DOWN 66
 #define ENTER 10
 #define ARROW 91
 #define BACK 127
+#define HOME 68
+#define END 67
 #define YES 121
 #define NO 110
 #define NEW 0
@@ -43,10 +46,11 @@ typedef enum TextColor
     TC_WHITE = 15
 } TextColor;
 
-void switchoption(int numofoption);
-void displayEmployee (employee e[],int size);
-void enterNewEmployee (employee e[],int index);
 void setTextColor(FILE *stream, TextColor color);
 void gotoxy(int x,int y);
 char getche(void);
 char getch(void);
+void switchoption(int numofoption);
+void displayEmployee (employee e[],int size);
+void enterNewEmployee (employee e[],int index);
+
