@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "empfunction.h"
+
 /*
     Reference:-
 
@@ -13,70 +14,70 @@
             https://stackoverflow.com/questions/44234508/change-text-color-using-c
 */
 #ifdef _WIN32
-#include <windows.h>    // for win32 API functions
-#include <io.h>         // for _get_osfhandle()
+    #include <windows.h>    // for win32 API functions
+    #include <io.h>         // for _get_osfhandle()
 #else
-#ifndef _POSIX_SOURCE
-#define _POSIX_SOURCE   // enable POSIX extensions in standard library headers
-#endif
-#include <unistd.h>     // for isatty()
+    #ifndef _POSIX_SOURCE
+        #define _POSIX_SOURCE   // enable POSIX extensions in standard library headers
+    #endif
+    #include <unistd.h>     // for isatty()
 
-#include <termios.h> //for getch(),getche()
-static struct termios old, current;
+    #include <termios.h> //for getch(),getche()
+    static struct termios old, current;
 
-/* Initialize new terminal i/o settings */
-void initTermios(int echo)
-{
-    tcgetattr(0, &old); /* grab old terminal i/o settings */
-    current = old; /* make new settings same as old settings */
-    current.c_lflag &= ~ICANON; /* disable buffered i/o */
-    if (echo)
+    /* Initialize new terminal i/o settings */
+    void initTermios(int echo)
     {
-        current.c_lflag |= ECHO; /* set echo mode */
+        tcgetattr(0, &old); /* grab old terminal i/o settings */
+        current = old; /* make new settings same as old settings */
+        current.c_lflag &= ~ICANON; /* disable buffered i/o */
+        if (echo)
+        {
+            current.c_lflag |= ECHO; /* set echo mode */
+        }
+        else
+        {
+            current.c_lflag &= ~ECHO; /* set no echo mode */
+        }
+        tcsetattr(0, TCSANOW, &current); /* use these new terminal i/o settings now */
     }
-    else
+
+    /* Restore old terminal i/o settings */
+    void resetTermios(void)
     {
-        current.c_lflag &= ~ECHO; /* set no echo mode */
+        tcsetattr(0, TCSANOW, &old);
     }
-    tcsetattr(0, TCSANOW, &current); /* use these new terminal i/o settings now */
-}
 
-/* Restore old terminal i/o settings */
-void resetTermios(void)
-{
-    tcsetattr(0, TCSANOW, &old);
-}
+    /* Read 1 character - echo defines echo mode */
+    char getch_(int echo)
+    {
+        char ch;
+        initTermios(echo);
+        ch = getchar();
+        resetTermios();
+        return ch;
+    }
 
-/* Read 1 character - echo defines echo mode */
-char getch_(int echo)
-{
-    char ch;
-    initTermios(echo);
-    ch = getchar();
-    resetTermios();
-    return ch;
-}
+    /* Read 1 character without echo */
+    char getch(void)
+    {
+        return getch_(0);
+    }
 
-/* Read 1 character without echo */
-char getch(void)
-{
-    return getch_(0);
-}
+    /* Read 1 character with echo */
+    char getche(void)
+    {
+        return getch_(1);
+    }
 
-/* Read 1 character with echo */
-char getche(void)
-{
-    return getch_(1);
-}
-
-// set output color on the given stream:
-void setTextColor(FILE *stream, TextColor color);
-//gotoxy function
-#define clear() printf("\033[H\033[J")
-void gotoxy(int x,int y)
-{
-    printf("%c[%d;%df",0x1B,y,x);
-}
+    // set output color on the given stream:
+    void setTextColor(FILE *stream, TextColor color);
+    //gotoxy function
+    #define clear() printf("\033[H\033[J")
+    void gotoxy(int x,int y)
+    {
+        printf("%c[%d;%df",0x1B,y,x);
+    }
 #endif
 
 #ifdef _WIN32
@@ -165,6 +166,40 @@ void setTextColor(FILE *stream, TextColor color)
     }
 }
 
+
+
+
+#endif
+#ifdef _WIN32
+void delay(int number_of_seconds)
+{
+    // Converting time into milli_seconds
+    int milli_seconds = 1000 * number_of_seconds;
+
+    // Storing start time
+    clock_t start_time = clock();
+
+    // looping till required time is not achieved
+    while (clock() < start_time + milli_seconds);
+}
+#else
+void delay(int number_of_seconds) {
+    fflush(stdout);
+    // Converting time into clock ticks (assuming CLOCKS_PER_SEC is the number of clock ticks per second)
+    int clock_ticks = number_of_seconds * CLOCKS_PER_SEC;
+
+    // Storing start time
+    clock_t start_time = clock();
+
+    // Loop until the required time has passed
+    while (clock() - start_time < clock_ticks) {
+        // Busy-waiting, consuming CPU cycles (not efficient)
+    }
+    /*struct timespec req;
+    req.tv_sec = 1;      // Delay for 1 second
+    req.tv_nsec = number_of_seconds*1;  // 500 milliseconds (0.5 seconds)
+    nanosleep(&req, NULL);  // Delay for 1.5 seconds*/
+}
 #endif
 
 void switchoption(int numofoption)
@@ -205,10 +240,38 @@ void switchoption(int numofoption)
         printf("Exit\n");
         setTextColor(stdout,TC_WHITE);
         break;
-         case 5:
+    case 5:
         printf("Add New Employee\nDisplay Employee\nDelete Employee\nModifie Employee\n");
         setTextColor(stdout,TC_BLUE);
         printf("Exit\n");
+        setTextColor(stdout,TC_WHITE);
+        break;
+    }
+}
+
+void switchModifieOption(int numofoption,int index)
+{
+    system("clear");
+    printf("Employee %d : \n",index+1);
+    switch(numofoption)
+    {
+    case 0:
+        setTextColor(stdout,TC_BLUE);
+        printf("Code");
+        setTextColor(stdout,TC_WHITE);
+        printf("\nName\nSalary\n");
+        break;
+    case 1:
+        printf("Code\n");
+        setTextColor(stdout,TC_BLUE);
+        printf("Name");
+        setTextColor(stdout,TC_WHITE);
+        printf("\nSalary\n");
+        break;
+    case 2:
+        printf("Code\nName\n");
+        setTextColor(stdout,TC_BLUE);
+        printf("Salary\n");
         setTextColor(stdout,TC_WHITE);
         break;
     }

@@ -43,16 +43,16 @@ int main()
         }
         else if(ch==ENTER)
         {
-
+            char validsize;
             if(option==NEW)
             {
-                do
-                {
+                validsize=1;
+                do{
                     if(size==SIZE)
                     {
                         system("clear");
                         printf("The storage space is full,You can not add employee\n");
-                        break;
+                        validsize=0;
                     }
                     else
                     {
@@ -74,8 +74,7 @@ int main()
                                 isenter=0;
                         }
                     }
-                }
-                while(ch==YES);
+                }while(ch==YES&&validsize);
             }
             else if(option==DISPLAY)
             {
@@ -87,13 +86,13 @@ int main()
             }
             else if(option==DELETE)
             {
-                do
-                {
+                validsize=1;
+                do{
                     if(size==0)
                     {
                         system("clear");
                         printf("No employee added\n");
-                        break;
+                        validsize=0;
                     }
                     else
                     {
@@ -116,21 +115,39 @@ int main()
                                 isenter=0;
                         }
                     }
-                }
-                while(ch==YES);
+                }while(ch==YES && validsize);
             }
             else if(option==MODIFIE)
             {
-                system("clear");
-                if(size==0)
-                {
-                    printf("No employee added\n");
-                }
-                else
-                {
-                    displayIdEmployee(emp,size);
-                    printf("Enter the employee id you want to Modifie : ");
-                }
+                 validsize=1;
+                 do{
+                    if(size==0)
+                    {
+                        system("clear");
+                        printf("No employee added\n");
+                        validsize=0;
+                    }
+                    else
+                    {
+                        system("clear");
+                        displayIdEmployee(emp,size);
+                        modifieEmployee(emp,size);
+                        printf("Do you want modifie another employee Yes(y) or No(n)?\n");
+                        char isenter=1;
+                        while(isenter)
+                        {
+                            ch=getch();
+                            if(ch==NO)
+                            {
+                                system("clear");
+                                switchoption(option);
+                                isenter=0;
+                            }
+                            else if(ch==YES)
+                                isenter=0;
+                        }
+                    }
+                }while(ch==YES && validsize);
             }
             else
             {
@@ -140,17 +157,4 @@ int main()
             }
         }
     }
-
-
-
-    /* char ch;
-     ch=getch();
-     printf("%d\n",ch);
-     ch=getch();
-     printf("%d\n",ch);
-     ch=getch();
-     printf("%d\n",ch);
-     ch=getch();
-     printf("%d\n",ch);*/
-
 }

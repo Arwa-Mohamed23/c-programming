@@ -1,0 +1,45 @@
+# depslib dependency file v1.0
+1732263662 source:/home/arwa/Documents/c-programming/lab1/menu/main.c
+	<stdio.h>
+	<stdlib.h>
+	"empfunction.h"
+
+1732272491 source:/home/arwa/Documents/c-programming/lab1/menu/empfunction .c
+	<stdio.h>
+	<stdlib.h>
+	"empfunction.h"
+
+1732271414 /home/arwa/Documents/c-programming/lab1/menu/empfunction.h
+
+1732271494 source:/home/arwa/Documents/c-programming/lab1/menu/terminalfunction.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"empfunction.h"
+	<windows.h>
+	<io.h>
+	<unistd.h>
+	<termios.h>
+
+1732272491 source:/home/arwa/Documents/c-programming/DB-Employee/empfunction .c
+	<stdio.h>
+	<stdlib.h>
+	"empfunction.h"
+
+1732271414 /home/arwa/Documents/c-programming/DB-Employee/empfunction.h
+
+1732273012 source:/home/arwa/Documents/c-programming/DB-Employee/main.c
+	<stdio.h>
+	<stdlib.h>
+	"empfunction.h"
+
+1732271494 source:/home/arwa/Documents/c-programming/DB-Employee/terminalfunction.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"empfunction.h"
+	<windows.h>
+	<io.h>
+	<unistd.h>
+	<termios.h>
+

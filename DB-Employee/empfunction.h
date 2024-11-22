@@ -15,6 +15,9 @@
 #define DELETE 2
 #define MODIFIE 3
 #define EXIT 4
+#define CODE 0
+#define NAME 1
+#define SALARY 2
 
 
 
@@ -51,6 +54,9 @@ void gotoxy(int x,int y);
 char getche(void);
 char getch(void);
 void switchoption(int numofoption);
+void switchModifieOption(int numofoption,int index);
 void displayEmployee (employee e[],int size);
 void enterNewEmployee (employee e[],int index);
-
+void displayIdEmployee(employee e[],int size);
+void deletEmployee(employee e[],int size);
+void modifieEmployee(employee e[],int size);
