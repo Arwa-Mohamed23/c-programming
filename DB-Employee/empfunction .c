@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include "empfunction.h"
 
-char uniqcode[101]= {0};
 
-void enterNewEmployee (employee e[],int index)
+
+void enterNewEmployee (employee e[],int index,char * uniqcode)
 {
     char checkvalid;
     char isvalide=1;
@@ -62,7 +62,7 @@ void displayIdEmployee(employee e[],int size)
     }
 }
 
-void deletEmployee(employee e[],int size)
+void deletEmployee(employee e[],int size,char * uniqcode)
 {
     int id;
     char checkvalid;
@@ -99,7 +99,7 @@ void deletEmployee(employee e[],int size)
     }
 }
 
-void modifieEmployee(employee e[],int size)
+void modifieEmployee(employee e[],int size,char * uniqcode)
 {
     int id;
     char checkvalid;
@@ -121,7 +121,7 @@ void modifieEmployee(employee e[],int size)
                 {
                     foundindex=1;
                     isvalide=0;
-                    modifieData(e,i);
+                    modifieData(e,i,uniqcode);
                 }
             }
             if(foundindex==0)
@@ -132,7 +132,7 @@ void modifieEmployee(employee e[],int size)
     }
 }
 
-void modifieData(employee e[],int index)
+void modifieData(employee e[],int index,char * uniqcode)
 {
     int option=0;
     switchModifieOption(option,index);

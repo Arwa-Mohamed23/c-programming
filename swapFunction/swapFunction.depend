@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1732382581 source:/home/arwa/Documents/c-programming/swapFunction/main.c
+	<stdio.h>
+	<stdlib.h>
+

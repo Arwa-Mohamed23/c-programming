@@ -4,6 +4,7 @@
 
 int main()
 {
+    char uniqcode[101]= {0};
     employee emp[SIZE]= {0};
     int size=0,option=0;
     char ch;
@@ -57,7 +58,7 @@ int main()
                     else
                     {
                         system("clear");
-                        enterNewEmployee(emp,size);
+                        enterNewEmployee(emp,size,uniqcode);
                         size++;
                         printf("Do you want enter another employee Yes(y) or No(n)?\n");
                         char isenter=1;
@@ -98,7 +99,7 @@ int main()
                     {
                         system("clear");
                         displayIdEmployee(emp,size);
-                        deletEmployee(emp,size);
+                        deletEmployee(emp,size,uniqcode);
                         size--;
                         printf("Do you want delet another employee Yes(y) or No(n)?\n");
                         char isenter=1;
@@ -131,7 +132,7 @@ int main()
                     {
                         system("clear");
                         displayIdEmployee(emp,size);
-                        modifieEmployee(emp,size);
+                        modifieEmployee(emp,size,uniqcode);
                         printf("Do you want modifie another employee Yes(y) or No(n)?\n");
                         char isenter=1;
                         while(isenter)
