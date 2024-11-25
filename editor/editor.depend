@@ -1,0 +1,27 @@
+# depslib dependency file v1.0
+1732571987 source:/home/arwa/Documents/c-programming/editor/main.c
+	<stdio.h>
+	<stdlib.h>
+	"linefunction.h"
+
+1732392046 source:/home/arwa/Documents/c-programming/editor/terminalfunction.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"empfunction.h"
+	<windows.h>
+	<io.h>
+	<unistd.h>
+	<termios.h>
+
+1732391913 /home/arwa/Documents/c-programming/editor/empfunction.h
+
+1732392067 source:/home/arwa/Documents/c-programming/editor/empfunction .c
+
+1732570513 source:/home/arwa/Documents/c-programming/editor/linefunction .c
+	<stdio.h>
+	<stdlib.h>
+	"linefunction.h"
+
+1732571998 /home/arwa/Documents/c-programming/editor/linefunction.h
+
